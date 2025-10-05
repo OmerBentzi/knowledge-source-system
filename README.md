@@ -186,6 +186,52 @@ Supporting all of them demonstrates the pipeline's schema-agnostic flexibility a
 - Site crawling for multi-page documentation portals.
 - Layout-aware parsing for tables/figures and caption linking.
 
+### 🧩 Tech Stack Rationale
+
+This project was intentionally built **without heavy frameworks** (like LangChain) to demonstrate a strong grasp of core RAG and retrieval mechanics, from data ingestion to query generation.  
+Each component was carefully selected for clarity, performance, and maintainability.
+
+| Component | Purpose | Rationale |
+|------------|----------|------------|
+| **PyMuPDF (`fitz`)** | PDF parsing and text extraction | Robust, fast, and lightweight library supporting text, metadata, and embedded image extraction. Handles complex layouts better than pure text-based PDF parsers. |
+| **Tesseract (`pytesseract`)** | OCR for image-based PDFs | Enables processing of scanned or hybrid documents containing visual data (e.g., diagrams, tables). Ensures no loss of context in mixed-media PDFs. |
+| **scikit-learn (TF-IDF + cosine similarity)** | Classical retriever | A transparent, dependency-light retrieval method ideal for structured text (API docs, papers). Easy to debug and interpret compared to dense vector models. |
+| **OpenAI API (Embeddings + GPT)** | Semantic retrieval and generative response | Complements TF-IDF with semantic embeddings (`text-embedding-3-small`) for web content. LLM integration (`gpt-4o-mini`) enables answer synthesis and reasoning beyond keyword search. |
+| **Streamlit** | Interactive front-end | Provides a clean and minimal interface for testing, visualizing retrieval results, and debugging retrieval thresholds. Great for prototyping without a full web stack. |
+| **Playwright** | Web rendering engine | Handles JS-heavy or dynamically loaded web pages (common in documentation portals). Ensures that full page content—including interactive sections—is captured before indexing. |
+
+---
+
+### ⚙️ Design Philosophy
+
+The system is **framework-independent and transparent**:
+- End-to-end data flow (parsing → indexing → retrieval → generation)
+- Interchangeable retrievers (TF-IDF vs. Embeddings)
+- Modular architecture allowing future integration with FAISS, Pinecone, or LangChain
+- Production-ready foundation that could scale into a true knowledge assistant for technical domains
+
+---
+
+### 🧠 Why Not LangChain?
+
+LangChain is excellent for orchestration, but in a short-form home assignment:
+- It adds abstraction layers that obscure the core logic.
+- Custom implementations make reasoning easier to explain in interviews.
+- The code demonstrates that **you can build LangChain-like functionality from first principles** — a skill highly valued in applied AI roles.
+
+---
+
+### 🚀 Optional Future Enhancements
+
+- Replace TF-IDF with **FAISS or Chroma** for persistent semantic vector stores.
+- Add **hybrid search** combining sparse (TF-IDF) and dense (embeddings) retrieval.
+- Wrap Streamlit UI in a **FastAPI** backend for deployment.
+- Add **Dockerfile + MLflow** for experiment tracking and reproducibility.
+
+---
+
+  
+
 ### Sample Q&A Prompts
 API Docs:
 - "List the available endpoints."
