@@ -1,0 +1,12 @@
+pymupdf==1.24.9
+pillow==10.4.0
+pytesseract==0.3.13
+scikit-learn==1.5.2
+numpy==2.1.2
+tqdm==4.66.5
+python-dotenv==1.0.1
+openai==1.51.2
+beautifulsoup4==4.12.3
+streamlit==1.38.0
+playwright==1.48.0
+
