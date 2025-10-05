@@ -45,7 +45,7 @@ knowledge_source_system/
 ### Requirements
 - Python 3.10+
 - Windows/macOS/Linux
-- Tesseract OCR on PATH (optional, improves scanned PDFs)
+
 
 Install Python deps:
 ```bash
